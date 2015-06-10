@@ -1,5 +1,4 @@
 
-
 /**
  * Copyright (c) 2015 Andrew Rapp. All rights reserved.
  *
@@ -25,6 +24,7 @@
 #include <Wire.h>
 #include <RemoteUploader.h>
 
+
 // NOTE: Leonardo seems to have no problem powering the xbee ~50ma and and a Diecimila
 
 // Set to true to forward serial (xbee traffic) to other Arduino
@@ -38,13 +38,15 @@
 #define ACK_TIMEOUT 1000
 
 // these can be swapped to any other free digital pins
-#define XBEE_SOFTSERIAL_TX_PIN 8
-#define XBEE_SOFTSERIAL_RX_PIN 7
-#define RESET_PIN 9
+#define XBEE_SOFTSERIAL_TX_PIN 9
+#define XBEE_SOFTSERIAL_RX_PIN 8
+#define RESET_PIN 11
+
+// #define USBDEBUG true
 
 // Specify the XBee coordinator address to send ACKs SH + SL
 const uint32_t COORD_MSB_ADDRESS = 0x0013a200;
-const uint32_t COORD_LSB_ADDRESS = 0x408b98fe;
+const uint32_t COORD_LSB_ADDRESS = 0x40c84a74;
 
 XBee xbee = XBee();
 XBeeResponse response = XBeeResponse();
@@ -71,14 +73,14 @@ ZBTxStatusResponse txStatus2 = ZBTxStatusResponse();
 
 //Since Arduino 1.0 we have the superior softserial implementation: NewSoftSerial
 // Remember to connect all devices to a common Ground: XBee, Arduino and USB-Serial device
-SoftwareSerial nss(XBEE_SOFTSERIAL_TX_PIN, XBEE_SOFTSERIAL_RX_PIN);
+SoftwareSerial nss(XBEE_SOFTSERIAL_RX_PIN, XBEE_SOFTSERIAL_TX_PIN);
 
 RemoteUploader remoteUploader = RemoteUploader();
 
 extEEPROM eeprom = extEEPROM(kbits_256, 1, 64);
 
 // keep track radio type: series 1 or 2
-uint8_t series = 0;
+uint8_t series = SERIES2;
 
 Stream* getXBeeSerial() {
   return &nss;  
