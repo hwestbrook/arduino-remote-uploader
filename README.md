@@ -4,4 +4,4 @@ This project provides remote upload of Arduino sketches over Wifi (ESP8266), XBe
 
 <a href="https://vine.co/v/O0jLBw7aO1m" target="_blank"><img src="https://raw.githubusercontent.com/andrewrapp/arduino-remote-uploader/master/resources/vine-xbee.png" alt="vine" width="300" height="299" border="0" /></a>
 
-
+## This is adapted from andrewrapp's original code to allow for a raspberry pi to upload to a receiving device
